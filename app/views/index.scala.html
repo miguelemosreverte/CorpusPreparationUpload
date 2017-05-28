@@ -4,7 +4,7 @@
 
  @helper.form(action = routes.HomeController.upload, 'enctype -> "multipart/form-data") {
     <label>Language Name</label>
-    <input type="text"/>
+    @helper.inputText(form("LM_name"))
     @helper.inputFile(form("CorpusPreparationSource"))
     @helper.inputFile(form("CorpusPreparationTarget"))
     @helper.inputFile(form("CorpusPreparationLM"))

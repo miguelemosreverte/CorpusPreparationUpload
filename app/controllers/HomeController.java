@@ -32,17 +32,15 @@ public class HomeController extends Controller {
     @BodyParser.Of(MyMultipartFormDataBodyParser.class)
     public Result upload() throws IOException {
         final Http.MultipartFormData<File> formData = request().body().asMultipartFormData();
-        final Http.MultipartFormData.FilePart<File> filePart = formData.getFile("name");
-        final File file = filePart.getFile();
-        final long data = operateOnTempFile(file);
-        return ok("file size = " + data + "");
+        final String LM_name = request().body().asMultipartFormData().asFormUrlEncoded().get("LM_name")[0].toString();
+        final Http.MultipartFormData.FilePart<File> CorpusPreparationSource_filePart = formData.getFile("CorpusPreparationSource");
+        final Http.MultipartFormData.FilePart<File> CorpusPreparationTarget_filePart = formData.getFile("CorpusPreparationTarget");
+        final Http.MultipartFormData.FilePart<File> CorpusPreparationLM_filePart = formData.getFile("CorpusPreparationLM");
+        final File CorpusPreparationSource = CorpusPreparationSource_filePart.getFile();
+        final File CorpusPreparationTarget = CorpusPreparationTarget_filePart.getFile();
+        final File CorpusPreparationLM = CorpusPreparationLM_filePart.getFile();
+        System.out.println(LM_name);
+        return ok("Success!");
     }
-
-    private long operateOnTempFile(File file) throws IOException {
-        final long size = Files.size(file.toPath());
-        Files.deleteIfExists(file.toPath());
-        return size;
-    }
-
 }
 
