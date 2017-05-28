@@ -3,7 +3,11 @@
 @main("Welcome to Play") {
 
  @helper.form(action = routes.HomeController.upload, 'enctype -> "multipart/form-data") {
-  @helper.inputFile(form("name"))
-  <input type="submit" value="upload file"/>
+    <label>Language Name</label>
+    <input type="text"/>
+    @helper.inputFile(form("CorpusPreparationSource"))
+    @helper.inputFile(form("CorpusPreparationTarget"))
+    @helper.inputFile(form("CorpusPreparationLM"))
+    <input type="submit" value="Upload Files"/>
  }
 }
